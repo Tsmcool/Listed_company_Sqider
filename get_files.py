@@ -53,7 +53,8 @@ def get_annual_report(company_list):
         for page in range(1, df_company_list['page_nums'][i] + 1):
             data = {'secCode': ts_code[:6], 'market': market, 'pn': page}
             res = session.post(company_url, headers=header, data=data)
-            downpath = jmespath_expr.search(json.loads(res.text)
+            downpath = jmespath_expr.search(json.loads(res.text))
+            print(ts_code,downpath)
         if len(downpath) > 0:
             title = jmespath.search("files[?ends_with(title, '2021年年度报告')].title", json.loads(res.text))
             try:
